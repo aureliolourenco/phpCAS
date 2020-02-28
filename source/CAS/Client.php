@@ -2183,7 +2183,11 @@ class CAS_Client
                     foreach ($xres as $node2) {
                         $value_array[] = $node2->nodeValue;
                     }
-                    $attr_array[$name] = $value_array;
+                    if (!array_key_exists($name, $attr_array)) {
+                        $attr_array[$name] = $value_array;
+                    } else {
+                        $attr_array[$name] = array_merge($attr_array[$name], $value_array);
+                    }
                 }
                 // UGent addition...
                 foreach ($attr_array as $attr_key => $attr_value) {
